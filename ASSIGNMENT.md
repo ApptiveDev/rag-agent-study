@@ -61,14 +61,14 @@ PR 본문에는 아래 내용을 포함합니다.
 
 1주차 목표는 helper agent 뒤에 숨어 있는 LangGraph의 기본 실행 모델을 직접 이해하는 것입니다.
 
-LangChain의 `create_agent` 같은 고수준 agent helper는 사용하지 않습니다. `StateGraph`로 직접 ReAct loop를 구성해 보세요. 자기 도메인에 맞는 도구를 2~3개 만들고, 모델이 도구 사용 여부를 판단한 뒤 최종 답변을 생성하는 흐름을 그래프로 표현합니다.
+LangChain의 `create_agent` 같은 고수준 agent helper는 사용하지 않습니다. `StateGraph`로 직접 ReAct loop를 구성해 보세요. 자기 도메인에 맞는 도구를 2-3개 만들고, 모델이 도구 사용 여부를 판단한 뒤 최종 답변을 생성하는 흐름을 그래프로 표현합니다.
 
 도구가 반드시 실제 API일 필요는 없습니다. 초반에는 mock 데이터나 간단한 로컬 함수만으로도 충분합니다.
 
 필수 요구사항:
 
 - `StateGraph`로 직접 그래프 구성
-- 도메인용 tool 2~3개 구현
+- 도메인용 tool 2-3개 구현
 - 조건부 엣지로 tool 호출 여부 제어
 - 최종 응답을 Pydantic 또는 TypedDict 기반 structured output으로 강제
 - 그래프 시각화 결과 포함
@@ -200,12 +200,12 @@ LangChain의 `create_agent` 같은 고수준 agent helper는 사용하지 않습
 
 6주차 목표는 5주차 단일 agent를 역할이 분리된 multi-agent system으로 확장하는 것입니다.
 
-Supervisor agent를 두고, 도메인에 맞는 서브에이전트 2~3개를 구성합니다. 예를 들어 researcher, analyzer, writer처럼 역할을 나눌 수 있습니다. Handoff 패턴 또는 tool-calling supervisor 패턴 중 하나를 선택하고, 왜 그 패턴을 골랐는지 정리합니다.
+Supervisor agent를 두고, 도메인에 맞는 서브에이전트 2-3개를 구성합니다. 예를 들어 researcher, analyzer, writer처럼 역할을 나눌 수 있습니다. Handoff 패턴 또는 tool-calling supervisor 패턴 중 하나를 선택하고, 왜 그 패턴을 골랐는지 정리합니다.
 
 필수 요구사항:
 
 - supervisor agent 구성
-- 서브에이전트 2~3개 구성
+- 서브에이전트 2-3개 구성
 - handoff 또는 tool-calling supervisor 패턴 중 하나 선택
 - 5주차 tool agent 또는 RAG tool 재사용
 - 최종 데모 시나리오 1개 이상 구성
@@ -228,7 +228,7 @@ Supervisor agent를 두고, 도메인에 맞는 서브에이전트 2~3개를 구
 
 ## 운영 가이드
 
-- 기본 과제 예상 시간은 주당 4~6시간입니다.
+- 기본 과제 예상 시간은 주당 4-6시간입니다.
 - 심화 과제는 선택입니다. 필수 과제를 먼저 끝내고 여유가 있을 때 진행합니다.
 - 매주 시작 30분은 지난 주 과제 데모 시간으로 사용합니다.
 - 데모는 1인당 5분 내외로 짧게 진행합니다.
