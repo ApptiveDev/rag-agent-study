@@ -43,14 +43,14 @@ RAG 노트북은 `data/`, `rag/` 상대 경로를 사용합니다. 경로 문제
 
 ## 주차별 학습 내용
 
-| 주차 | 주제 | 핵심 학습 내용 | 과제 요약 | 바로가기 |
-|---|---|---|---|---|
-| 1주차 | LangGraph 기초 문법 | 모델과 메시지, `StateGraph`, State/Reducer, 챗봇 그래프, `ToolNode` | `StateGraph`로 도메인용 ReAct 루프 직접 구현 | [week1 열기](./week1-langgraph-basics) |
-| 2주차 | LangGraph 심화 문법 | Graph API, checkpointer memory, streaming, human-in-the-loop, branching, subgraph | 1주차 그래프에 short-term memory와 실행 제어 추가 | [week2 열기](./week2-langgraph-advanced) |
-| 3주차 | RAG 기초 | Retrieval, vector store, naive RAG, groundedness check, web search, query rewrite | 도메인 문서 기반 2-step RAG 구축 및 청킹 비교 | [week3 열기](./week3-rag-basics) |
-| 4주차 | RAG 심화 및 평가 | Agentic RAG, CRAG, Self-RAG, Adaptive RAG, hallucination/answer grading, GraphRAG 선택 실습 | Agentic RAG 또는 reranker로 3주차 RAG 개선 | [week4 열기](./week4-rag-advanced-evaluation) |
-| 5주차 | Agent 기초 | `create_agent`, tool schema, structured output, streaming, runtime, context engineering | RAG를 도구로 감싼 단일 ReAct agent 구현 | [week5 열기](./week5-agent-basics) |
-| 6주차 | Agent 심화 및 평가 | middleware, HITL, guardrail, supervisor, multi-agent, plan-and-execute, SQL agent evaluation | Supervisor multi-agent로 최종 시스템 확장 | [week6 열기](./week6-agent-advanced-evaluation) |
+| 주차 | 주제 | 핵심 학습 내용 | 바로가기 |
+|---|---|---|---|
+| 1주차 | LangGraph 기초 문법 | 모델과 메시지, `StateGraph`, State/Reducer, 챗봇 그래프, `ToolNode` | [week1 열기](./week1-langgraph-basics) |
+| 2주차 | LangGraph 심화 문법 | Graph API, checkpointer memory, streaming, human-in-the-loop, branching, subgraph | [week2 열기](./week2-langgraph-advanced) |
+| 3주차 | RAG 기초 | Retrieval, vector store, naive RAG, groundedness check, web search, query rewrite | [week3 열기](./week3-rag-basics) |
+| 4주차 | RAG 심화 및 평가 | Agentic RAG, CRAG, Self-RAG, Adaptive RAG, hallucination/answer grading, GraphRAG 선택 실습 | [week4 열기](./week4-rag-advanced-evaluation) |
+| 5주차 | Agent 기초 | `create_agent`, tool schema, structured output, streaming, runtime, context engineering | [week5 열기](./week5-agent-basics) |
+| 6주차 | Agent 심화 및 평가 | middleware, HITL, guardrail, supervisor, multi-agent, plan-and-execute, SQL agent evaluation | [week6 열기](./week6-agent-advanced-evaluation) |
 
 과제의 상세 요구사항은 [ASSIGNMENT.md](./ASSIGNMENT.md)에 정리되어 있습니다.
 
