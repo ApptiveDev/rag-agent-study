@@ -39,14 +39,12 @@ assignments/
 
 브랜치는 `{깃헙아이디}/{과제명}` 형식으로 만듭니다.
 
-| 주차 | 브랜치 예시 | 제출 위치 |
-|---|---|---|
-| 1주차 | `your-id/week1-react-graph` | `assignments/your-id/week1/` |
-| 2주차 | `your-id/week2-state-memory` | `assignments/your-id/week2/` |
-| 3주차 | `your-id/week3-domain-rag` | `assignments/your-id/week3/` |
-| 4주차 | `your-id/week4-agentic-rag` | `assignments/your-id/week4/` |
-| 5주차 | `your-id/week5-tool-agent` | `assignments/your-id/week5/` |
-| 6주차 | `your-id/week6-supervisor-agent` | `assignments/your-id/week6/` |
+- 1주차: `your-id/week1-react-graph` -> `assignments/your-id/week1/`
+- 2주차: `your-id/week2-state-memory` -> `assignments/your-id/week2/`
+- 3주차: `your-id/week3-domain-rag` -> `assignments/your-id/week3/`
+- 4주차: `your-id/week4-agentic-rag` -> `assignments/your-id/week4/`
+- 5주차: `your-id/week5-tool-agent` -> `assignments/your-id/week5/`
+- 6주차: `your-id/week6-supervisor-agent` -> `assignments/your-id/week6/`
 
 PR 본문에는 아래 내용을 포함합니다.
 
