@@ -16,7 +16,6 @@ dependencies = [
     "langchain-neo4j>=0.3.0,<0.8.0",
     "langchain-openai>=1.1.12",
     "langchain-tavily>=0.2.17",
-    "langchain-teddynote>=0.5.4",
     "langchain-text-splitters>=1.1.1",
     "langgraph>=1.1.3",
     "langgraph-checkpoint-postgres>=3.0.5",
