@@ -4,12 +4,17 @@ from mock_data import TROUBLESHOOTING_NOTES
 
 NOTE_BY_ID = {note["id"]: note for note in TROUBLESHOOTING_NOTES}
 
+def _tokenize(query: str) -> list[str]:
+  return [token.lower() for token in query.split() if token.strip()]
+
 @tool
 def search_notes(
   query: str,
   category: Optional[str] = None,
   min_blog_value: Optional[int] = None,
 ) -> list[dict]:
+  """keyword를 바탕으로 트러블슈팅 노트를 찾는다."""
+
   query_lower = query.lower()
   results = []
 
@@ -30,9 +35,11 @@ def search_notes(
       "structural_insight": note.get("structural_insight", ""),
     }
 
+    query_tokens = _tokenize(query)
+
     matched_fields = [
       field for field, value in searchable_fields.items()
-      if query_lower in value.lower()
+      if any(token in value.lower() for token in query_tokens)
     ]
 
     if matched_fields:
@@ -49,6 +56,8 @@ def search_notes(
 
 @tool
 def get_note_detail(note_id: str) -> dict:
+  """note_id를 가지고 트러블슈팅 노트의 자세한 정보를 가져오기"""
+
   note = NOTE_BY_ID.get(note_id)
 
   if not note:
@@ -75,6 +84,8 @@ def generate_narrative_outline(
   note_id: str,
   target_reader: str = "junior_backend_engineer"
 ) -> dict:
+  """트러블 슈팅 노트에서 블로그 스타일의 narrative 아웃라인을 생성하기"""
+
   note = NOTE_BY_ID.get(note_id)
 
   if not note:

@@ -45,12 +45,28 @@ TROUBLESHOOTING_NOTES = [
         "structural_insight": "이 문제는 결국 서버 성능 문제가 아니라 긴 요청과 DB connection 생명주기를 분리하지 못한 구조 문제였다.",
         "content_angle": "데이터 변경이 드문 기능이라 long polling이 효율적일 거라 생각했지만, 서버 리소스 관점에서는 오히려 위험할 수 있었던 사례",
         "blog_value": 5,
+        "evidence": [
+            "키오스크 기기 추가 후 서버가 몇 분 안에 강제 종료됨",
+            "DB 점유율 증가 및 QueuePool timeout 발생",
+            "long polling 요청이 SQLAlchemy session을 장시간 유지",
+            "session이 commit/rollback/close 되기 전까지 connection pool로 반환되지 않음",
+            "동시 polling 요청 수 증가 시 session과 connection이 함께 장시간 점유됨",
+            "pool_size 및 max_overflow 증가 시 일시적으로 완화되었지만 근본 해결은 되지 않음",
+            "system-status 로그가 비정상적으로 빠르게 반복 출력됨",
+            "since 파라미터가 None으로 들어가며 즉시 전체 반환 분기가 반복 실행됨",
+            "check_interval을 1초 → 3초로 변경 후 로그 빈도 감소",
+            "클라이언트 수 증가에 따라 열린 long polling 요청 수가 선형적으로 증가",
+            "일반 polling 대비 long polling이 항상 더 효율적인 것은 아님을 확인",
+            "DB polling 기반 long polling 구현은 polling과 유사한 DB 부하를 유발",
+            "SSE가 점검 상태 같은 단방향 push 구조에 더 적합할 수 있다는 점 검토",
+            "근본 해결을 위해 long polling loop 내부에서 매 반복마다 session 종료 및 connection 반환 필요"
+        ],
     },
     {
         "id": "android-cleartext-network-security-config",
         "title": "Android HTTP 서버 연결 실패와 Network Security Config 설정",
         "category": "mobile_networking",
-        "tech_stack": ["React Native", "Expo", "EAS Build", "Android", "iOS", "HTTP"],
+        "tech_stack": ["React-Native", "Expo", "EAS Build", "Android", "iOS", "HTTP"],
         "project": "mobile-app",
         "severity": "medium",
 
@@ -311,7 +327,7 @@ TROUBLESHOOTING_NOTES = [
         "title": "X-Username 기반 사용자 식별과 JWT 인증 경계 충돌",
         "category": "authentication_design",
         "tech_stack": [
-            "React Native",
+            "React-Native",
             "Expo",
             "JWT",
             "AsyncStorage",
