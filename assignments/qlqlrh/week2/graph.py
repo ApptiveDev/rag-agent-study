@@ -38,7 +38,9 @@ SYSTEM_PROMPT = """
 """
 
 model_with_tools = init_chat_model("gpt-5.4-mini").bind_tools(ALL_TOOLS)
-structured_model = init_chat_model("gpt-5.4-mini").with_structured_output(ConsultationResponse)
+structured_model = init_chat_model("gpt-5.4-mini").with_structured_output(
+    ConsultationResponse, method="json_schema", strict=True
+)
 
 
 # 공유되는 데이터의 형태 선언
