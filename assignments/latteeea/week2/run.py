@@ -14,12 +14,19 @@ config = {
   }
 }
 
-result = app.invoke({
-  "messages": [
-    HumanMessage(content="React 사례 찾아줘")
-  ]
-},
-config = config)
+inputs = [
+  "React 사례 찾아줘",
+  "아까 그 사례 다시 설명해줘",
+]
 
-for msg in result["messages"]:
-  print(msg)
+for text in inputs:
+  result = app.invoke(
+    {"messages": [HumanMessage(content=text)]},
+    config = config,
+  )
+  
+  print("\n--- latteeea ---")
+  print(text)
+  
+  print("\n--- AI ---")
+  print(result["messages"][-1])
