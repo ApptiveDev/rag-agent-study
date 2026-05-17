@@ -4,20 +4,19 @@ load_dotenv(override=True)
 
 from langchain_core.messages import HumanMessage
 from graph import build_graph
+from langgraph.types import Command
 
 
 app = build_graph()
 
 config = {
   "configurable": {
-    "thread_id" : "react-thread"
+    "thread_id" : "week2-interrupt-thread"
   }
 }
 
 inputs = [
-  "long polling 관련 사례 찾아줘",
-  "방금 말한 그 사례는 구조/단순 버그 문제 중에 어디에 속할까?",
-  "네가 말한 그 관점으로 사례를 다시 정리해줘"
+  "long polling 관련 사례를 글로 만들어줘",
 ]
 
 for text in inputs:
@@ -31,3 +30,15 @@ for text in inputs:
   
   print("\n--- AI ---")
   print(result["messages"][-1])
+
+result = app.invoke(
+  Command(resume="2"),
+  config = config,
+)
+
+print("\n--- INTERRUPT TEST ---")
+print("Agent asked for narrative direction.")
+print("Resume with choice: 2")
+
+print(result["messages"][-1])
+print("narrative_intent:", result.get("narrative_intent"))
