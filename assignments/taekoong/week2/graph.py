@@ -131,7 +131,7 @@ def should_continue(state: AgentState) -> Literal["tools", "format_output"]:
 def build_graph() -> StateGraph:
     builder = StateGraph(AgentState)
 
-    builder.add_node("agent", agent_node)
+    builder.add_node("agent", with_token_logging(agent_node))
     builder.add_node("tools", tool_node)
     builder.add_node("format_output", format_output_node)
 
