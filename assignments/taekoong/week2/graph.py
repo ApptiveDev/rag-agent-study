@@ -48,6 +48,15 @@ SYSTEM_PROMPT = """당신은 마인크래프트 전문 지식 에이전트입니
 도구 결과가 없거나 오류가 발생하면 알고 있는 지식으로 최선을 다해 답변하세요.
 마크다운 문법(**굵게**, ```코드블록```, # 제목 등)은 사용하지 말고 일반 텍스트로만 답변하세요."""
 
+def with_token_logging(node_fn):
+    def wrapper(state):
+        result = node_fn(state)
+        last_msg = result["messages"][-1]
+        if hasattr(last_msg, "usage_metadata") and last_msg.usage_metadata:
+            usage = last_msg.usage_metadata
+            print(f"[토큰] 입력: {usage['input_tokens']} | 출력: {usage['output_tokens']} | 합계: {usage['total_tokens']}")
+        return result
+    return wrapper
 
 ### 3. 노드 정의 ###
 
