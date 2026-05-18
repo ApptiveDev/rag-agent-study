@@ -1,8 +1,8 @@
 from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
 from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 from langchain.chat_models import init_chat_model
-from langsmith import Client
 
 from abc import ABC, abstractmethod
 from operator import itemgetter
@@ -16,7 +16,6 @@ class RetrievalChain(ABC):
         self.k = 8
         self.model_name = "claude-sonnet-4-5"  # OpenAI 키 사용 시 gpt-4.1-mini 등으로 변경
         self.temperature = 0
-        self.prompt = "teddynote/rag-prompt"
         self.embeddings = "text-embedding-3-small"
         self.index_dir = Path(".cache/faiss_index")
 
@@ -107,8 +106,22 @@ class RetrievalChain(ABC):
         return init_chat_model(self.model_name, temperature=self.temperature)
 
     def create_prompt(self):
-        # LangSmith Client를 사용하여 프롬프트 로드
-        return Client().pull_prompt(self.prompt)
+        return ChatPromptTemplate.from_messages(
+            [
+                (
+                    "system",
+                    "You are a helpful assistant for question-answering tasks. "
+                    "Use the retrieved context to answer the question. "
+                    "If you do not know the answer from the context, say that you do not know. "
+                    "Answer in the same language as the question. "
+                    "Keep the answer concise and cite useful source/page information when available.",
+                ),
+                (
+                    "human",
+                    "Question:\n{question}\n\nChat history:\n{chat_history}\n\nContext:\n{context}",
+                ),
+            ]
+        )
 
     def create_chain(self):
         docs = self.load_documents(self.source_uri)
@@ -119,7 +132,11 @@ class RetrievalChain(ABC):
         model = self.create_model()
         prompt = self.create_prompt()
         self.chain = (
-            {"question": itemgetter("question"), "context": itemgetter("context")}
+            {
+                "question": itemgetter("question"),
+                "context": itemgetter("context"),
+                "chat_history": lambda inputs: inputs.get("chat_history", ""),
+            }
             | prompt
             | model
             | StrOutputParser()
