@@ -1,196 +1,135 @@
-import json
 import os
-from typing import Literal
+from pathlib import Path
+from typing import Annotated, Optional
 
-from langchain_core.messages import AIMessage, HumanMessage, SystemMessage, ToolMessage
-from langchain_openai import ChatOpenAI
-from langgraph.graph import END, START, StateGraph
-from langgraph.prebuilt import ToolNode
+from dotenv import load_dotenv
+from langchain.chat_models import init_chat_model
+from langchain_core.messages import AIMessage, SystemMessage
+from langgraph.graph import START, StateGraph
+from langgraph.graph.message import add_messages
+from langgraph.prebuilt import ToolNode, tools_condition
+from typing_extensions import TypedDict
 
-from schema import BaseballAgentState, BaseballFinalAnswer
-from tools import BASEBALL_TOOLS
-
-
-SYSTEM_PROMPT = """You are a Korean baseball rules assistant.
-Use tools when the user asks about a specific rule, term, or game situation.
-If the user asks a general advice question, answer without tools.
-Keep answers concise and practical."""
-
-DEFAULT_MODEL = "gpt-5-mini"
+from schema import PrepAnswer
+from tools import ALL_TOOLS
 
 
-def _has_openai_key() -> bool:
-    return bool(os.getenv("OPENAI_API_KEY"))
+def load_project_env() -> None:
+    """Load only the repository-root .env file."""
+    env_path = Path(__file__).resolve().parents[3] / ".env"
+    load_dotenv(env_path, override=True)
 
 
-def _latest_human_text(state: BaseballAgentState) -> str:
-    for message in reversed(state["messages"]):
-        if isinstance(message, HumanMessage):
-            return str(message.content)
-    return ""
+load_project_env()
+
+os.environ.setdefault("LANGSMITH_TRACING", "false")
+os.environ.setdefault("LANGSMITH_TRACING_V2", "false")
 
 
-def _tool_messages(state: BaseballAgentState) -> list[ToolMessage]:
-    return [message for message in state["messages"] if isinstance(message, ToolMessage)]
+SYSTEM_PROMPT = """
+당신은 클래식 공연 예습을 돕는 RAG 에이전트입니다.
+
+[역할]
+- 사용자가 공연 링크를 보내면 공연 상세 페이지를 읽고, 공연명/일시/장소/연주자/프로그램을 파악합니다.
+- 사용자가 작품명이나 작곡가만 말하면 해당 작품을 중심으로 예습 자료를 찾습니다.
+- 초보자가 공연 전에 궁금해할 내용을 중심으로 설명합니다.
+- 너무 음악학적으로 깊게 들어가기보다, "이 곡이 뭔지", "왜 유명한지", "어떤 배경에서 만들어졌는지", "공연장에서 무엇을 들으면 좋은지"를 알려줍니다.
+
+[공연 링크가 있는 경우]
+도구 호출은 가능한 한 다음 순서를 따르세요.
+1) fetch_concert_page(url)
+   - 공연 상세 페이지의 텍스트를 가져옵니다.
+2) extract_concert_program(page_text)
+   - 공연명, 날짜, 장소, 연주자, 프로그램 후보를 추출합니다.
+3) retrieve_work_overview(query)
+   - 각 작품이 어떤 곡인지 초보자용 개요를 검색합니다.
+4) retrieve_creation_background(query)
+   - 작품의 작곡 배경과 맥락을 검색합니다.
+5) retrieve_concert_listening_points(query)
+   - 공연장에서 들을 감상 포인트를 검색합니다.
+6) retrieve_preview_keywords(query)
+   - 공연 전에 들어볼 만한 유튜브 검색어 또는 예습 키워드를 가져옵니다.
+
+[공연 링크가 없는 경우]
+- 사용자의 질문에서 작품명, 작곡가, 악장, 공연 맥락을 파악하세요.
+- 특정 작품/작곡가/악장에 대한 질문이면 필요한 도구를 선택적으로 호출하세요.
+  - retrieve_work_overview
+  - retrieve_creation_background
+  - retrieve_concert_listening_points
+  - retrieve_preview_keywords
+- 일반적인 공연 예습 방법을 묻는 질문이면 도구를 호출하지 않아도 됩니다.
+
+[도구를 호출하지 않아도 되는 경우]
+- 사용자가 일반 인사나 간단한 사용법을 묻는 경우.
+- 특정 작품/공연 정보 검색이 필요 없는 일반 조언인 경우.
+- 직전 메시지에 이미 충분한 예습 결과가 있고 재활용할 수 있는 경우.
+
+[응답 형식]
+- 도구를 사용한 경우, 도구 결과를 근거로 한국어로 정리하세요.
+- 초보자 친화적으로 답하세요.
+- 확실하지 않은 정보는 추측하지 말고 불확실하다고 말하세요.
+- 최종 답변에는 가능하면 다음을 포함하세요.
+  · 공연 정보 또는 작품명
+  · 한 줄 요약
+  · 작곡/역사적 배경
+  · 공연장에서 들을 포인트
+  · 공연 전 예습 추천
+  · 유튜브 또는 웹 검색 키워드
+  · 참고한 출처 또는 도구 결과
+"""
 
 
-def _tool_names_from_state(state: BaseballAgentState) -> list[str]:
-    return [message.name or "unknown_tool" for message in _tool_messages(state)]
+MODEL_NAME = os.getenv("CLASSICAL_AGENT_MODEL", "openai:gpt-5.4-mini")
+
+model_with_tools = init_chat_model(MODEL_NAME).bind_tools(ALL_TOOLS)
+structured_model = init_chat_model(MODEL_NAME).with_structured_output(PrepAnswer)
 
 
-def _select_demo_tool_call(question: str) -> AIMessage:
-    lowered = question.lower()
-
-    if any(keyword in question for keyword in ["좋은", "어떤 정보", "설명하려면", "기준"]):
-        return AIMessage(content="도구 없이 답변할 수 있는 일반 질문입니다.")
-
-    if any(keyword in question for keyword in ["상황", "판정", "주자", "아웃", "플라이", "투구 동작"]):
-        return AIMessage(
-            content="상황 판정을 위해 야구 상황 판정 도구를 확인하겠습니다.",
-            tool_calls=[
-                {
-                    "name": "judge_game_situation",
-                    "args": {"situation": question},
-                    "id": "call_judge_situation",
-                }
-            ],
-        )
-
-    if any(keyword in question for keyword in ["뜻", "용어", "OPS", "WHIP", "보크", "태그업", "낫아웃"]):
-        term = question
-        for candidate in ["보크", "태그업", "낫아웃", "인필드 플라이"]:
-            if candidate in question:
-                term = candidate
-                break
-        if "ops" in lowered:
-            term = "OPS"
-        if "whip" in lowered:
-            term = "WHIP"
-        return AIMessage(
-            content="용어 설명 도구를 확인하겠습니다.",
-            tool_calls=[
-                {
-                    "name": "explain_baseball_term",
-                    "args": {"term": term},
-                    "id": "call_explain_term",
-                }
-            ],
-        )
-
-    if any(keyword in question for keyword in ["규칙", "룰", "인필드", "보크", "태그업", "낫아웃"]):
-        topic = "infield_fly" if "인필드" in question else question
-        return AIMessage(
-            content="규칙 검색 도구를 확인하겠습니다.",
-            tool_calls=[
-                {
-                    "name": "lookup_baseball_rule",
-                    "args": {"topic": topic},
-                    "id": "call_lookup_rule",
-                }
-            ],
-        )
-
-    return AIMessage(content="도구 없이 답변할 수 있는 일반 질문입니다.")
+class AgentState(TypedDict):
+    messages: Annotated[list, add_messages]
+    used_tools: list[str]
+    final_answer: Optional[PrepAnswer]
 
 
-def call_model(state: BaseballAgentState) -> dict:
-    """Agent node. Uses real tool-calling LLM when configured, otherwise demo routing."""
-    if _tool_messages(state):
-        return {"messages": [AIMessage(content="도구 결과를 바탕으로 최종 답변을 작성합니다.")]}
+def _collect_used_tools(messages: list) -> list[str]:
+    used_tools = []
 
-    if _has_openai_key():
-        model_name = os.getenv("BASEBALL_MODEL", DEFAULT_MODEL)
-        model = ChatOpenAI(model=model_name, temperature=0).bind_tools(BASEBALL_TOOLS)
-        response = model.invoke([SystemMessage(content=SYSTEM_PROMPT), *state["messages"]])
-        return {"messages": [response]}
+    for message in messages:
+        for tool_call in getattr(message, "tool_calls", []) or []:
+            tool_name = tool_call.get("name")
+            if tool_name and tool_name not in used_tools:
+                used_tools.append(tool_name)
 
-    return {"messages": [_select_demo_tool_call(_latest_human_text(state))]}
+    return used_tools
 
 
-def route_after_agent(state: BaseballAgentState) -> Literal["tools", "final"]:
-    last_message = state["messages"][-1]
-    if isinstance(last_message, AIMessage) and last_message.tool_calls:
-        return "tools"
-    return "final"
+def agent_node(state: AgentState):
+    messages = [SystemMessage(content=SYSTEM_PROMPT), *state["messages"]]
+    response = model_with_tools.invoke(messages)
+
+    if response.tool_calls:
+        return {
+            "messages": [response],
+            "used_tools": _collect_used_tools([*state["messages"], response]),
+        }
+
+    final = structured_model.invoke(messages)
+    used_tools = _collect_used_tools(state["messages"])
+    final.used_tools = used_tools
+
+    return {
+        "messages": [AIMessage(content=final.model_dump_json(indent=2))],
+        "used_tools": used_tools,
+        "final_answer": final,
+    }
 
 
-def _summarize_tool_payloads(state: BaseballAgentState) -> tuple[str, list[str]]:
-    summaries: list[str] = []
-    references: list[str] = []
-    for message in _tool_messages(state):
-        try:
-            payload = json.loads(str(message.content))
-        except json.JSONDecodeError:
-            payload = {"raw": str(message.content)}
+builder = StateGraph(AgentState)
+builder.add_node("agent", agent_node)
+builder.add_node("tools", ToolNode(ALL_TOOLS))
 
-        if isinstance(payload, dict):
-            if "ruling" in payload:
-                summaries.append(f"{payload.get('ruling')} {payload.get('reason', '')}".strip())
-            elif "summary" in payload:
-                summaries.append(str(payload["summary"]))
-            elif "explanation" in payload:
-                summaries.append(str(payload["explanation"]))
-            elif "message" in payload:
-                summaries.append(str(payload["message"]))
+builder.add_edge(START, "agent")
+builder.add_conditional_edges("agent", tools_condition)
+builder.add_edge("tools", "agent")
 
-            reference = payload.get("reference")
-            if reference:
-                references.append(str(reference))
-        else:
-            summaries.append(str(payload))
-
-    return "\n".join(summaries), references
-
-
-def make_structured_response(state: BaseballAgentState) -> dict:
-    """Final node that enforces the Pydantic output schema."""
-    question = _latest_human_text(state)
-    used_tools = _tool_names_from_state(state)
-    tool_summary, references = _summarize_tool_payloads(state)
-
-    if tool_summary:
-        answer = f"질문: {question}\n\n판정/설명: {tool_summary}"
-        ruling = tool_summary.split("\n", maxsplit=1)[0]
-        confidence = "high"
-    else:
-        answer = (
-            "야구 규칙을 볼 때는 먼저 아웃카운트, 주자 위치, 타구 종류, 수비수의 실제 "
-            "플레이 가능성을 순서대로 확인하면 됩니다."
-        )
-        ruling = "일반 설명"
-        confidence = "medium"
-
-    final_response = BaseballFinalAnswer(
-        answer=answer,
-        ruling=ruling,
-        used_tools=used_tools,
-        confidence=confidence,
-        references=references or ["general baseball rules guidance"],
-        next_steps=["아웃카운트와 주자 위치를 함께 적으면 더 정확히 판정할 수 있습니다."],
-    )
-    return {"final_response": final_response}
-
-
-def build_graph():
-    builder = StateGraph(BaseballAgentState)
-
-    builder.add_node("agent", call_model)
-    builder.add_node("tools", ToolNode(BASEBALL_TOOLS))
-    builder.add_node("final", make_structured_response)
-
-    builder.add_edge(START, "agent")
-    builder.add_conditional_edges(
-        "agent",
-        route_after_agent,
-        {
-            "tools": "tools",
-            "final": "final",
-        },
-    )
-    builder.add_edge("tools", "agent")
-    builder.add_edge("final", END)
-
-    return builder.compile()
-
-
-graph = build_graph()
+graph = builder.compile()
