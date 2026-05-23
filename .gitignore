@@ -20,3 +20,6 @@ wheels/
 *.mmd
 .idea
 .omc
+
+# assignments
+assignments/latteeea/week3/cache/
