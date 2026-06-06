@@ -1,0 +1,6 @@
+chroma_db/
+chroma_db_A/
+chroma_db_B/
+__pycache__/
+.env
+*.pyc
