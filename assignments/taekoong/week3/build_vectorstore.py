@@ -41,7 +41,7 @@ vectorstore = Chroma.from_documents(
     persist_directory="./chroma_db"
 )
 
-## test csearch
+## test search
 results = vectorstore.similarity_search(
     "What is the use of a diamond?",
     k=3
