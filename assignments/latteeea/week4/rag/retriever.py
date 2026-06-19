@@ -1,7 +1,14 @@
+from pathlib import Path
+
 from vectorstore import load_faiss_vectorstore
 
-RECURSIVE_INDEX_DIR = "./cache/faiss_recursive"
-MARKDOWN_INDEX_DIR = "./cache/faiss_markdown"
+WEEK4_ROOT = Path(__file__).resolve().parent.parent
+CACHE_ROOT = WEEK4_ROOT / "cache"
+if not (CACHE_ROOT / "faiss_markdown").exists():
+    CACHE_ROOT = WEEK4_ROOT.parent / "week3" / "cache"
+
+RECURSIVE_INDEX_DIR = str(CACHE_ROOT / "faiss_recursive")
+MARKDOWN_INDEX_DIR = str(CACHE_ROOT / "faiss_markdown")
 
 def get_retriever(strategy: str = "recursive", k: int = 4):
     if strategy == "recursive":

@@ -1,39 +1,80 @@
-from typing import Annotated, TypedDict
+from langgraph.graph import END, START, StateGraph
 
-from langchain_core.messages import BaseMessage
-from langchain_openai import ChatOpenAI
-from langgraph.graph import StateGraph, START
-from langgraph.graph.message import add_messages
-from langgraph.prebuilt import ToolNode, tools_condition
+from nodes import (
+    decide_to_generate,
+    generate_node,
+    grade_documents_node,
+    grade_generation,
+    retrieve_node,
+    transform_query_node,
+)
+from state import GraphState
 
-from state import AgentState
-from tools import TOOLS
-from memory import checkpointer
-from nodes import extract_hypotheses_nodes, narrative_interrupt_node
-
-
-llm = ChatOpenAI(model="gpt-4o-mini", temperature=0)
-llm_with_tools = llm.bind_tools(TOOLS)
-
-def agent_node(state: AgentState):
-  response = llm_with_tools.invoke(state["messages"])
-  return {"messages": [response]}
 
 def build_graph():
-  graph = StateGraph(AgentState)
-  
-  graph.add_node("extract_hypothesis", extract_hypotheses_nodes)
-  graph.add_node("narrative_interrupt", narrative_interrupt_node)
-  graph.add_node("agent", agent_node)
-  graph.add_node("tools", ToolNode(TOOLS))
-  
-  graph.add_edge(START,"extract_hypothesis")
-  graph.add_edge("extract_hypothesis", "narrative_interrupt")
-  graph.add_edge("narrative_interrupt", "agent")
-  
-  graph.add_conditional_edges("agent", tools_condition)
-  graph.add_edge("tools", "agent")
+    workflow = StateGraph(GraphState)
 
-  return graph.compile(
-    checkpointer=checkpointer
-  )
+    workflow.add_node("retrieve", retrieve_node)
+    workflow.add_node("grade_documents", grade_documents_node)
+    workflow.add_node("generate", generate_node)
+    workflow.add_node("transform_query", transform_query_node)
+
+    workflow.add_edge(START, "retrieve")
+    workflow.add_edge("retrieve", "grade_documents")
+    workflow.add_conditional_edges(
+        "grade_documents",
+        decide_to_generate,
+        {
+            "transform_query": "transform_query",
+            "generate": "generate",
+        },
+    )
+    workflow.add_edge("transform_query", "retrieve")
+    workflow.add_conditional_edges(
+        "generate",
+        grade_generation,
+        {
+            "hallucination": "generate",
+            "relevant": END,
+            "not relevant": "transform_query",
+        },
+    )
+
+    return workflow.compile()
+
+
+def run_agentic_rag(
+    question: str,
+    strategy: str = "markdown",
+) -> dict:
+    app = build_graph()
+    result = app.invoke(
+        {
+            "question": question,
+            "original_question": question,
+            "generation": "",
+            "documents": [],
+            "strategy": strategy,
+            "rewrite_count": 0,
+            "generation_attempts": 0,
+        }
+    )
+
+    sources = [
+        {
+            "source": doc.metadata.get("source"),
+            "filename": doc.metadata.get("filename"),
+            "chunk_id": doc.metadata.get("chunk_id"),
+            "strategy": doc.metadata.get("chunk_strategy"),
+        }
+        for doc in result.get("documents", [])
+    ]
+
+    return {
+        "question": result.get("original_question", question),
+        "rewritten_question": result.get("question", question),
+        "rewrite_count": result.get("rewrite_count", 0),
+        "strategy": strategy,
+        "answer": result.get("generation", ""),
+        "sources": sources,
+    }

@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from loader import load_md_documents
 from splitter import split_recursive, split_md_header
 
@@ -7,11 +9,17 @@ from vectorstore import (
     reset_faiss_index,
 )
 
-RECURSIVE_INDEX_DIR = "./cache/faiss_recursive"
-MARKDOWN_INDEX_DIR = "./cache/faiss_markdown"
+WEEK4_ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = WEEK4_ROOT / "data"
+if not DATA_DIR.exists():
+    DATA_DIR = WEEK4_ROOT.parent / "week3" / "data"
+
+CACHE_ROOT = WEEK4_ROOT / "cache"
+RECURSIVE_INDEX_DIR = str(CACHE_ROOT / "faiss_recursive")
+MARKDOWN_INDEX_DIR = str(CACHE_ROOT / "faiss_markdown")
 
 def build_recursive_index():
-    docs = load_md_documents("data")
+    docs = load_md_documents(str(DATA_DIR))
     
     chunks = split_recursive(docs)
     
@@ -29,7 +37,7 @@ def build_recursive_index():
     print(f"Saved recursive index -> {RECURSIVE_INDEX_DIR}")
     
 def build_markdown_index():
-    docs = load_md_documents("data")
+    docs = load_md_documents(str(DATA_DIR))
     
     chunks = split_md_header(docs)
     
