@@ -1,0 +1,180 @@
+{
+  "description": "Raw Wikipedia text extracts for week3 RAG corpus. Ingest raw/*.txt only for source text without metadata.",
+  "license_note": "Wikipedia text is available under Creative Commons Attribution-ShareAlike 4.0 License and GFDL. Keep attribution when redistributing.",
+  "document_count": 28,
+  "sources": [
+    {
+      "file": "raw/01_classical_music.txt",
+      "title": "Classical music",
+      "source_url": "https://en.wikipedia.org/wiki/Classical_music",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/02_concert_etiquette.txt",
+      "title": "Concert etiquette",
+      "source_url": "https://en.wikipedia.org/wiki/Concert_etiquette",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/03_orchestra.txt",
+      "title": "Orchestra",
+      "source_url": "https://en.wikipedia.org/wiki/Orchestra",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/04_symphony.txt",
+      "title": "Symphony",
+      "source_url": "https://en.wikipedia.org/wiki/Symphony",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/05_concerto.txt",
+      "title": "Concerto",
+      "source_url": "https://en.wikipedia.org/wiki/Concerto",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/06_chamber_music.txt",
+      "title": "Chamber music",
+      "source_url": "https://en.wikipedia.org/wiki/Chamber_music",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/07_sonata.txt",
+      "title": "Sonata",
+      "source_url": "https://en.wikipedia.org/wiki/Sonata",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/08_string_quartet.txt",
+      "title": "String quartet",
+      "source_url": "https://en.wikipedia.org/wiki/String_quartet",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/09_ludwig_van_beethoven.txt",
+      "title": "Ludwig van Beethoven",
+      "source_url": "https://en.wikipedia.org/wiki/Ludwig_van_Beethoven",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/10_wolfgang_amadeus_mozart.txt",
+      "title": "Wolfgang Amadeus Mozart",
+      "source_url": "https://en.wikipedia.org/wiki/Wolfgang_Amadeus_Mozart",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/11_johann_sebastian_bach.txt",
+      "title": "Johann Sebastian Bach",
+      "source_url": "https://en.wikipedia.org/wiki/Johann_Sebastian_Bach",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/12_gustav_mahler.txt",
+      "title": "Gustav Mahler",
+      "source_url": "https://en.wikipedia.org/wiki/Gustav_Mahler",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/13_claude_debussy.txt",
+      "title": "Claude Debussy",
+      "source_url": "https://en.wikipedia.org/wiki/Claude_Debussy",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/14_pyotr_ilyich_tchaikovsky.txt",
+      "title": "Pyotr Ilyich Tchaikovsky",
+      "source_url": "https://en.wikipedia.org/wiki/Pyotr_Ilyich_Tchaikovsky",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/15_symphony_no_5_beethoven.txt",
+      "title": "Symphony No. 5 (Beethoven)",
+      "source_url": "https://en.wikipedia.org/wiki/Symphony_No._5_(Beethoven)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/16_symphony_no_9_beethoven.txt",
+      "title": "Symphony No. 9 (Beethoven)",
+      "source_url": "https://en.wikipedia.org/wiki/Symphony_No._9_(Beethoven)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/17_symphony_no_5_mahler.txt",
+      "title": "Symphony No. 5 (Mahler)",
+      "source_url": "https://en.wikipedia.org/wiki/Symphony_No._5_(Mahler)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/18_symphony_no_9_dvorak.txt",
+      "title": "Symphony No. 9 (Dvořák)",
+      "source_url": "https://en.wikipedia.org/wiki/Symphony_No._9_(Dvořák)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/19_requiem_mozart.txt",
+      "title": "Requiem (Mozart)",
+      "source_url": "https://en.wikipedia.org/wiki/Requiem_(Mozart)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/20_the_four_seasons_vivaldi.txt",
+      "title": "The Four Seasons (Vivaldi)",
+      "source_url": "https://en.wikipedia.org/wiki/The_Four_Seasons_(Vivaldi)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/21_piano_concerto_no_2_rachmaninoff.txt",
+      "title": "Piano Concerto No. 2 (Rachmaninoff)",
+      "source_url": "https://en.wikipedia.org/wiki/Piano_Concerto_No._2_(Rachmaninoff)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)",
+      "api_url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cinfo&explaintext=1&redirects=1&inprop=url&titles=Piano+Concerto+No.+2+%28Rachmaninoff%29"
+    },
+    {
+      "file": "raw/22_violin_concerto_mendelssohn.txt",
+      "title": "Violin Concerto (Mendelssohn)",
+      "source_url": "https://en.wikipedia.org/wiki/Violin_Concerto_(Mendelssohn)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/23_cello_concerto_elgar.txt",
+      "title": "Cello Concerto (Elgar)",
+      "source_url": "https://en.wikipedia.org/wiki/Cello_Concerto_(Elgar)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)",
+      "api_url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cinfo&explaintext=1&redirects=1&inprop=url&titles=Cello+Concerto+%28Elgar%29"
+    },
+    {
+      "file": "raw/24_la_mer_debussy.txt",
+      "title": "La mer (Debussy)",
+      "source_url": "https://en.wikipedia.org/wiki/La_mer_(Debussy)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/25_bolero.txt",
+      "title": "Boléro",
+      "source_url": "https://en.wikipedia.org/wiki/Bol%C3%A9ro",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)",
+      "api_url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cinfo&explaintext=1&redirects=1&inprop=url&titles=Bol%C3%A9ro"
+    },
+    {
+      "file": "raw/26_the_rite_of_spring.txt",
+      "title": "The Rite of Spring",
+      "source_url": "https://en.wikipedia.org/wiki/The_Rite_of_Spring",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)"
+    },
+    {
+      "file": "raw/27_messiah_handel.txt",
+      "title": "Messiah (Handel)",
+      "source_url": "https://en.wikipedia.org/wiki/Messiah_(Handel)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)",
+      "api_url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cinfo&explaintext=1&redirects=1&inprop=url&titles=Messiah+%28Handel%29"
+    },
+    {
+      "file": "raw/28_carmina_burana_orff.txt",
+      "title": "Carmina Burana (Orff)",
+      "source_url": "https://en.wikipedia.org/wiki/Carmina_Burana_(Orff)",
+      "license": "CC BY-SA 4.0 / GFDL (Wikipedia text)",
+      "api_url": "https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts%7Cinfo&explaintext=1&redirects=1&inprop=url&titles=Carmina+Burana+%28Orff%29"
+    }
+  ]
+}

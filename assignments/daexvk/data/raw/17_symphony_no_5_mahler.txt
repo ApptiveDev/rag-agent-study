@@ -1,0 +1,126 @@
+The Symphony No. 5 in C# minor by Gustav Mahler was composed in 1901 and 1902, mostly during the summer months at Mahler's holiday cottage at Maiernigg. Among its most distinctive features are the trumpet solo that opens the work with a rhythmic motif similar to the opening of Ludwig van Beethoven's Symphony No. 5, the horn solos in the third movement and the frequently performed Adagietto.
+The musical canvas and emotional scope of the work, which lasts nearly 70 minutes, are huge. The symphony is sometimes described as being in the key of C♯ minor since the first movement is in this key (the finale, however, is in D major). Mahler objected to the label: "From the order of the movements (where the usual first movement now comes second) it is difficult to speak of a key for the 'whole Symphony', and to avoid misunderstandings the key should best be omitted."
+
+
+== Composition history ==
+
+Mahler wrote his fifth symphony during the summers of 1901 and 1902. In February 1901 Mahler had suffered a sudden major hemorrhage and his doctor later told him that he had come within an hour of bleeding to death. The composer spent quite a while recuperating. He moved into his own lakeside villa in the southern Austrian province of Carinthia in June 1901. Mahler was delighted with his newfound status as the owner of a grand villa. According to friends, he could hardly believe how far he had come from his humble beginnings. He was director of the Vienna Court Opera and the principal conductor of the Vienna Philharmonic. His own music was also starting to be successful. Later in 1901 he met Alma Schindler and by the time he returned to his summer villa in summer 1902, they were married and she was expecting their first child.
+Symphonies Nos. 5, 6 and 7, which all belong to this period, have much in common and are markedly different from the first four, which all have strong links to vocal music. The middle symphonies, by contrast, are pure orchestral works and are, by Mahler's standards, taut and lean.
+Counterpoint also becomes a more important element in Mahler's music from Symphony No. 5 onwards. The ability to write good counterpoint was highly cherished by Baroque composers, and Johann Sebastian Bach is generally regarded as the greatest composer of contrapuntal music. Bach played an important part in Mahler's musical life at this time. He subscribed to the edition of Bach's collected works that was being published at the turn of the century, and later conducted and arranged works by Bach for performance. Mahler's renewed interest in counterpoint can best be heard in the second, third and fifth movements of this symphony.
+
+
+== Instrumentation ==
+The symphony is scored for large orchestra, consisting of the following:
+
+
+== Revisions of the score ==
+The score appeared first in print in 1904 at Peters, Leipzig. A second "New Edition", incorporating revisions that Mahler made in 1904, appeared in 1905. Final revisions made by Mahler in 1911 (by which time he had completed his 9th Symphony) did not appear until 1964 (ed. Ratz), when the score was republished in the Complete Edition of Mahler's works. In 2002, Edition Peters published a further revised edition "Critical New Edition" (ed. Reinhold Kubik); however, this is still part of the "Old" Complete Edition. International Gustav Mahler Society is planning to publish a "New Critical Complete Edition" version of the 5th symphony (date unknown, in preparation) and therefore will be the most accurate edition, as other works from the New Critical Complete Edition.
+
+
+== Structure ==
+The symphony is generally regarded as the most conventional symphony that he had yet written, but from such an unconventional composer it still had many peculiarities. It almost has a four-movement structure, as the first two can easily be viewed as essentially a whole. The symphony also ends with a rondo, in the classical style. Some peculiarities are the funeral march that opens the piece and the Adagietto for harp and strings that contrasts with the complex orchestration of the other movements.
+A performance of the symphony lasts around 70 minutes.
+The work is in five movements, though Mahler grouped the movements into bigger parts:
+
+Part I
+1. Trauermarsch (Funeral march). In gemessenem Schritt. Streng. Wie ein Kondukt (At a measured pace. Strict. Like a funeral procession.) C♯ minor
+2. Stürmisch bewegt, mit größter Vehemenz (Moving stormily, with the greatest vehemence) A minor
+Part II
+3. Scherzo. Kräftig, nicht zu schnell (Strong and not too fast) D major
+Part III
+4. Adagietto. Sehr langsam (Very slow) F major
+5. Rondo-Finale. Allegro – Allegro giocoso. Frisch (Fresh) D major
+
+
+=== Part I ===
+
+
+==== 1. Trauermarsch ====
+
+The trumpet solo at the opening of the first movement which quotes the Generalmarsch of the Austro-Hungarian Army
+
+is followed by a somber, funeral march (the primary theme).
+
+The march is twice interrupted by a calmer secondary theme.
+
+
+==== 2. Stürmisch bewegt, mit größter Vehemenz ====
+
+There are many shared elements between the first and second movement. A sighing motif heard in the first movement
+
+becomes more prominent in the second movement
+
+and leads into the first theme.
+
+Rehearsal mark 5, marked im Tempo des ersten Satzes "Trauermarsch", introduces a theme accompanied by the sighing motif and a repeated quaver motif from the beginning of the movement.
+
+Later, another return to the Tempo des ersten Satzes: Trauermarsch, brings a return to the Secondary Theme of the first movement.
+A triumphant chorale breaks forth but dissolves into a return of the tragic material of the opening of the movement. Mahler emphasized this point in the score by adding two arrows.
+
+
+=== Part II ===
+
+
+==== 3. Scherzo ====
+
+The central scherzo develops several waltz and ländler themes. The mood abruptly shifts from the pessimism and storminess of the first two movements to a lighter, affirmative disposition, aided by the dance rhythms. This sudden change in the musical temperament exposes the "schizophrenic character" of the symphony, since the tragic nature of the first two movements is not reconciled with the more joyful mood of the scherzo. An obbligato solo horn is featured so prominently throughout the movement that the player is often called to stand in front of the audience, similar to a soloist in a concerto.
+
+
+=== Part III ===
+
+
+==== 4. Adagietto ====
+
+The Adagietto is scored for only the string section and a solo harp. The themes are:
+
+The fourth movement may be Mahler's most famous composition and is the most frequently performed of his works. The British premiere of the entire Symphony No. 5 came in 1945, 36 years after that of the Adagietto, which was conducted by Henry Wood at a Proms concert in 1909.
+It is said to represent Mahler's love song to his wife Alma. According to a letter she wrote to Willem Mengelberg, the composer left a small poem:
+
+This German text can easily be sung to the first theme of the Adagietto, beginning with the anacrusis to bar 3, reinforcing the suggestion that it is indeed intended as Mahler's love note to Alma and returning to the more vocal quality of the earlier symphonies.
+Mahler's instruction is Sehr langsam (very slowly). Mahler and Mengelberg played it in about 7 minutes. Some conductors have taken tempos that extend it to nearly 12 minutes (viz. recordings by Eliahu Inbal, Herbert von Karajan, and Claudio Abbado), while Simon Rattle with the Berlin Philharmonic performed it in 9+1⁄2 minutes. The shortest recorded performance is from Mengelberg (Concertgebouw, 1926) at 7′04″. The longest commercial recording is Bernard Haitink (Berliner Philharmoniker, 1988) at 13′55″. A recording of a live performance with Hermann Scherchen conducting the Philadelphia Orchestra from 1964 lasts 15′15″.
+Leonard Bernstein conducted it during the funeral Mass for Robert F. Kennedy at St. Patrick's Cathedral, Manhattan, on 8 June 1968, and he also briefly discusses this section along with the opening bars of the second movement in his Charles Eliot Norton Lectures from 1973.
+Although the Adagietto had regularly been performed on its own, it came to popular (i.e. non-classical) prominence in the 1971 Luchino Visconti film Death in Venice. In that film, the lead character was modified from the novel's original conception of writer to that of composer, with elements in common with Mahler. Since then, the music has been used across many fields, from advertising and figure skating to television and further film uses, easily making it the most familiar piece of Mahler's musical output.
+Music professor Jeremy Barham writes that the Adagietto has become the most "commercially prominent" of Mahler's symphonic movements, and that it has "accrued elegiac meaning" in the popular consciousness over the years, becoming particularly used in commemorative events following the September 11 attacks in the United States.
+
+
+==== 5. Rondo finale ====
+
+The final rondo is a contrapuntal tour de force. Several of the themes evolve out of the fragments heard in the opening measures. The last movement also utilizes themes from the Adagietto as well as the chorale from the second movement.
+
+
+== Premieres ==
+World premiere: October 18, 1904, Cologne – Gürzenich Orchestra Cologne conducted by the composer.
+United States premiere: March 24, 1905, Cincinnati – conducted by Frank Van der Stucken.
+Belgian premiere: March 5, 1906, Antwerp – 'Nouveaux Concerts' conducted by the composer.
+British premieres:
+Of Adagietto only: August 31, 1909, London – conducted by Henry Wood during a Proms concert.
+Of complete work: October 21, 1945, London – London Philharmonic Orchestra conducted by Heinz Unger.
+
+
+== Reaction ==
+Herbert von Karajan once said that when you hear the symphony, "you forget that time has passed. A great performance of the Fifth is a transforming experience."
+
+
+== References ==
+
+
+== Further reading ==
+Aldrich, Richard (11 February 1906). "A New Symphony by Gustav Mahler". The New York Times. p. P1. Retrieved 12 July 2020.
+Banks, Paul (May 1989) "Aspects of Mahler's Fifth Symphony: Performance Practice and Interpretation." The Musical Times, vol. 130, no. 1755, pp. 258–265.
+Barham, Jeremy (December 2018). "'The Ghost in the Machine': Thomas Koschat and the volkstümlich in Mahler's Fifth Symphony." Nineteenth-Century Music Review, vol. 15, no. 3, pp. 353–390. doi:10.1017/S1479409818000186
+Barry, Barbara R. (Spring 1993). "The Hidden Program in Mahler's Fifth Symphony." The Musical Quarterly, vol. 77, no. 1, pp. 47–66.
+Baxendale, Carolyn (1986–1987). "The Finale of Mahler's Fifth Symphony: Long-Range Musical Thought." Journal of the Royal Musical Association, vol. 112, no. 2, pp. 257–279.
+Buch, Esteban (Summer 2017). "Mahler's Fifth, Daniel Barenboim, and the Argentine Dictatorship: On Music, Meaning, and Politics." The Musical Quarterly, vol. 100, no. 2, pp. 122–154. doi:10.1093/musqtl/gdx015
+Forte, Allen (Autumn 1984). "Middleground Motives in the Adagietto of Mahler's Fifth Symphony." 19th-Century Music, vol. 8, no. 2, pp. 153–163.
+Kinderman, William (Summer 2005). "'Ich bin der Welt abhanden gekommen': Mahler's Rückert Setting and the Aesthetics of Integration in the Fifth Symphony." The Musical Quarterly, vol. 88, no. 2, pp. 232–273. doi:10.1093/musqtl/gdi006
+Micznik, Vera (June 1996). "Textual and Contextual Analysis: Mahler's Fifth Symphony and Scientific Thought." International Review of the Aesthetics and Sociology of Music, vol. 27, no. 1, pp. 13–29.
+Pavlović, Milijana (2013). "Lost And Found – Mahler's 'Fifth in Trieste.'" Studien zur Musikwissenschaft, vol. 57, pp. 275–297.
+Vernon, David (2022). Beauty and Sadness: Mahler's 11 Symphonies, Ch. 5 'Cosmic Expansion: The Fifth Symphony', pp. 173–202.
+Hurwitz, David. (2004) "The Mahler Symphonies, An Owner's Manual."
+
+
+== External links ==
+Symphony No. 5: Scores at the International Music Score Library Project
+Mahler's Symphony No. 5 – A Beginners' Guide – Overview, analysis and the best recordings – The Classic Review
+Analysis, by Walter, everything2.com, 15 March 2002
+Gilbert Kaplan: "In One Note of Mahler, a World of Meaning", The New York Times, 17 March 2002
