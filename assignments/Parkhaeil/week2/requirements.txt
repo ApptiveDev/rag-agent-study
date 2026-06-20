@@ -1,0 +1,7 @@
+langgraph
+langchain
+langchain-openai
+langchain-core
+python-dotenv
+langgraph-checkpoint-postgres
+psycopg[binary]
