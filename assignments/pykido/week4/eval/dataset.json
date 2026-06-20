@@ -1,0 +1,335 @@
+{
+  "meta": {
+    "domain": "알고리즘 코딩 테스트 코칭",
+    "label_unit": "source(파일) 단위",
+    "schema": "id, question, relevant(정답 source 파일 집합), reference_answer, hop(single|multi|none), answerable, failure_mode",
+    "failure_modes": ["wrong_retrieval", "hallucination", "out_of_domain", "ambiguous"],
+    "note": "answerable=false(out_of_domain) 항목은 relevant 가 비어 있고 retrieval_eval 에서 제외, answer_eval 의 Groundedness('모른다'고 답하는가) 로만 평가한다."
+  },
+  "items": [
+    {
+      "id": "q01",
+      "question": "이분 탐색에서 parametric search(매개변수 탐색)란 무엇이고 언제 쓰나요?",
+      "relevant": ["patterns/binary-search.md"],
+      "reference_answer": "값 자체가 아니라 '조건을 만족하는 최소/최대 값'을 찾는 기법입니다. 답 후보 x에 대해 가능한가?(x)가 한 방향으로만 변하는 단조 boolean이면, 답 자체를 이분 탐색합니다. 입국심사·징검다리가 대표 예입니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q02",
+      "question": "파이썬 heapq로 최대 힙을 만들려면 어떻게 하나요?",
+      "relevant": ["patterns/heap.md"],
+      "reference_answer": "heapq는 최소 힙만 제공하므로, 값에 음수를 취해 넣고 꺼낼 때 다시 부호를 뒤집으면 최대 힙처럼 동작합니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q03",
+      "question": "유니온 파인드에서 경로 압축을 빼면 어떤 문제가 생기나요?",
+      "relevant": ["patterns/union-find.md"],
+      "reference_answer": "경로 압축을 빼면 트리가 한쪽으로 길어져 find 연산이 느려집니다. 경로 압축과 랭크 기반 합치기를 함께 적용해야 연산당 거의 상수(역 애커만) 시간이 됩니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q04",
+      "question": "가변 슬라이딩 윈도우에서 윈도우를 축소할 때 if가 아니라 while을 써야 하는 이유는?",
+      "relevant": ["patterns/sliding-window.md"],
+      "reference_answer": "if로 축소하면 한 칸만 줄어 최소 구간을 놓칩니다. 조건을 만족하는 동안 while로 left를 끝까지 좁혀야 최소 길이 구간을 찾을 수 있습니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q05",
+      "question": "누적 합으로 구간 [i, j]의 합을 O(1)에 구하는 공식은?",
+      "relevant": ["patterns/prefix-sum.md"],
+      "reference_answer": "prefix[j+1] - prefix[i] 입니다. prefix 배열을 N+1 크기로 두고 prefix[0]=0에서 시작하면 경계가 깔끔합니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q06",
+      "question": "다익스트라에서 힙에서 꺼낸 거리가 dist[node]보다 클 때 왜 건너뛰나요?",
+      "relevant": ["patterns/dijkstra.md"],
+      "reference_answer": "이미 더 짧은 거리로 확정된 정점이라 다시 처리할 필요가 없기 때문입니다. d > dist[node] 검사를 빠뜨리면 중복 처리로 느려집니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q07",
+      "question": "투 포인터의 대향 포인터를 적용하려면 어떤 전제가 필요한가요?",
+      "relevant": ["patterns/two-pointers.md"],
+      "reference_answer": "배열이 정렬되어 있어야 합니다(단조성). 정렬되지 않은 배열에 대향 포인터를 쓰면 단조성이 깨져 오답이 납니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q08",
+      "question": "그리디가 항상 최적은 아닌데, 최적임을 어떻게 정당화하나요?",
+      "relevant": ["patterns/greedy.md"],
+      "reference_answer": "국소 최적 선택이 전역 최적으로 이어진다는 보장을 교환 논법(exchange argument)이나 매트로이드 성질로 증명해야 합니다. 증명 없이 직관만으로 적용하면 반례에서 무너집니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q09",
+      "question": "동적 계획법을 적용하기 위한 두 가지 전제 조건은?",
+      "relevant": ["patterns/dp.md"],
+      "reference_answer": "최적 부분 구조(큰 문제의 최적해가 부분 문제의 최적해로 구성됨)와 중복 부분 문제(같은 부분 문제가 여러 번 등장함)가 모두 성립해야 합니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q10",
+      "question": "백트래킹에서 결과에 path를 넣을 때 path[:]로 복사하는 이유는?",
+      "relevant": ["patterns/backtracking.md"],
+      "reference_answer": "path를 그대로 참조로 넣으면 이후 append/pop 변경이 저장된 결과에도 반영되어 오염됩니다. path[:]로 복사해 그 시점의 스냅샷을 저장해야 합니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q11",
+      "question": "해시 맵의 평균과 최악의 시간 복잡도는 각각 얼마인가요?",
+      "relevant": ["patterns/hash-map.md"],
+      "reference_answer": "평균 삽입/조회는 O(1), 해시 충돌이 많은 최악의 경우 O(N)입니다. N개 원소 전체 처리는 평균 O(N)입니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q12",
+      "question": "가중치가 모두 1인 그래프의 최단 거리는 BFS와 DFS 중 무엇으로 구하나요?",
+      "relevant": ["patterns/bfs-dfs.md"],
+      "reference_answer": "BFS입니다. 가중치 1 그래프에서는 BFS가 처음 방문하는 시점이 최단 거리입니다. DFS로 최단 거리를 구하려는 것은 흔한 실수입니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q13",
+      "question": "입국심사 문제에서 이분 탐색 범위의 hi는 왜 max(times)*n으로 잡나요?",
+      "relevant": ["problems/pgs-43238-immigration.md"],
+      "reference_answer": "hi를 max(times)로만 두면 사람이 많을 때 답을 못 찾기 때문입니다. 가장 느린 심사대 하나가 n명을 모두 처리하는 시간이 상한이므로 max(times)*n으로 충분히 크게 잡아야 합니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q14",
+      "question": "보석 쇼핑에서 left를 옮길 때 카운트가 0이 된 종류를 dict에서 삭제해야 하는 이유는?",
+      "relevant": ["problems/pgs-67258-gem-shopping.md"],
+      "reference_answer": "dict의 키 개수로 '모든 종류 포함' 여부를 판정하기 때문입니다. 카운트가 0이 된 키를 삭제하지 않으면 윈도우에 없는 종류가 포함된 것으로 잘못 판정됩니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q15",
+      "question": "두 큐 합 같게 만들기에서 -1을 반환하는 조건은?",
+      "relevant": ["problems/pgs-118667-two-queues.md"],
+      "reference_answer": "두 큐 전체 합이 홀수면 절대 같아질 수 없으므로 즉시 -1입니다. 또한 작업 횟수가 4*N을 넘도록 못 맞추면 -1로 판정합니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q16",
+      "question": "디스크 컨트롤러에서 요청 순서대로(FCFS) 처리하면 왜 평균 반환시간이 최소가 안 되나요?",
+      "relevant": ["problems/pgs-42627-disk-controller.md"],
+      "reference_answer": "짧은 작업을 먼저 처리할수록 뒤에 밀리는 작업들의 대기 시간 합이 줄기 때문입니다(SJF). 그래서 도착한 작업 중 소요 시간이 가장 짧은 것을 최소 힙에서 꺼내 처리해야 평균이 최소화됩니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q17",
+      "question": "등굣길 문제의 DP 점화식과 나눠야 하는 모듈러 값은?",
+      "relevant": ["problems/pgs-42898-school-path.md"],
+      "reference_answer": "dp[r][c] = dp[r-1][c] + dp[r][c-1] 이며, 물웅덩이는 0으로 막습니다. 매 갱신마다 1,000,000,007로 나눈 나머지를 취합니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q18",
+      "question": "타겟 넘버 문제를 DFS로 풀 때 base case는 무엇인가요?",
+      "relevant": ["problems/pgs-43165-target-number.md"],
+      "reference_answer": "인덱스가 배열 끝(i == len(numbers))에 도달했을 때입니다. 그 시점의 누적합이 target과 같으면 1, 아니면 0을 반환해 경우의 수를 셉니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q19",
+      "question": "징검다리 문제에서는 무엇을 이분 탐색의 대상으로 삼나요?",
+      "relevant": ["problems/pgs-43236-stepping-stones.md"],
+      "reference_answer": "'인접 지점 사이 거리 중 가장 짧은 거리'의 값(d)을 이분 탐색합니다. d 이상으로 만들 수 있는지를 그리디 제거 시뮬레이션으로 판정하고, 달성 가능한 최대 d를 찾습니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q20",
+      "question": "섬 연결하기의 크루스칼 풀이에서 사이클은 어떻게 검사하나요?",
+      "relevant": ["problems/pgs-42861-connecting-islands.md"],
+      "reference_answer": "union-find로 두 섬의 루트를 비교해 이미 같은 집합이면 다리를 놓을 때 사이클이 생기므로 건너뜁니다. 다른 집합일 때만 다리를 놓고 두 집합을 합칩니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q21",
+      "question": "입국심사 문제가 왜 parametric search인지, 이분 탐색의 단조성 개념과 연결해 설명해줘.",
+      "relevant": ["problems/pgs-43238-immigration.md", "patterns/binary-search.md"],
+      "reference_answer": "시간 t가 커질수록 처리 가능 인원 f(t)=sum(t//x)가 단조 증가하므로, f(t)>=n을 만족하는 최소 t를 답 자체에 대해 이분 탐색할 수 있습니다. 이렇게 답 후보의 가능 여부가 단조 boolean인 경우를 parametric search라고 합니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q22",
+      "question": "디스크 컨트롤러를 힙으로 푸는 이유를, 힙 자료구조의 특성과 함께 설명해줘.",
+      "relevant": ["problems/pgs-42627-disk-controller.md", "patterns/heap.md"],
+      "reference_answer": "매 처리 시점에 '소요 시간이 가장 짧은' 작업을 골라야 하는데, 힙은 최소 원소 추출을 O(log N)에 해주기 때문입니다. 도착한 작업을 소요 시간 기준 최소 힙에 넣고 꺼내며 SJF 스케줄링을 구현합니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q23",
+      "question": "섬 연결하기의 크루스칼 풀이에서 union-find와 그리디 선택이 각각 어떤 역할을 하나요?",
+      "relevant": ["problems/pgs-42861-connecting-islands.md", "patterns/union-find.md", "patterns/greedy.md"],
+      "reference_answer": "그리디는 간선을 비용 오름차순으로 보며 '지금 가장 싼 다리'를 고르는 선택이고, 이것이 MST에서 최적임이 증명되어 있습니다. union-find는 간선을 추가할 때 두 섬이 같은 집합인지 검사해 사이클을 방지하는 역할을 합니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q24",
+      "question": "보석 쇼핑을 슬라이딩 윈도우와 해시맵을 결합해 푸는 흐름을 설명해줘.",
+      "relevant": ["problems/pgs-67258-gem-shopping.md", "patterns/sliding-window.md", "patterns/hash-map.md"],
+      "reference_answer": "right를 늘리며 해시맵으로 윈도우 안 보석 종류별 개수를 셉니다. 모든 종류를 포함하면(dict 키 수 == 전체 종류 수) left를 while로 좁혀 최소 구간을 갱신하고, 카운트가 0이 된 종류는 dict에서 삭제합니다. 전체 O(N)입니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q25",
+      "question": "타겟 넘버를 DFS/백트래킹으로 푸는 이유와, BFS로 풀면 왜 비효율적인지 설명해줘.",
+      "relevant": ["problems/pgs-43165-target-number.md", "patterns/backtracking.md", "patterns/bfs-dfs.md"],
+      "reference_answer": "각 원소에 +/- 를 붙이는 두 갈래 분기를 DFS로 끝까지 내려가며 누적합을 인자로 전달해 셉니다. BFS로 풀면 모든 부분합을 큐에 쌓아 메모리가 폭발하므로 비효율적입니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "ambiguous"
+    },
+    {
+      "id": "q26",
+      "question": "등굣길 문제를 단순 DFS 재귀로 풀면 안 되는 이유를 DP의 중복 부분 문제 개념으로 설명해줘.",
+      "relevant": ["problems/pgs-42898-school-path.md", "patterns/dp.md"],
+      "reference_answer": "같은 칸으로 오는 경로 수가 여러 경로에서 반복 계산되는 중복 부분 문제이기 때문입니다. 메모이제이션 없는 DFS는 경로 수가 지수적으로 폭발하므로, dp[r][c]=dp[r-1][c]+dp[r][c-1]로 저장·재사용해야 합니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q27",
+      "question": "징검다리와 입국심사는 둘 다 이분 탐색이지만 찾는 경계(최대/최소)가 다릅니다. 차이를 설명해줘.",
+      "relevant": ["problems/pgs-43236-stepping-stones.md", "problems/pgs-43238-immigration.md", "patterns/binary-search.md"],
+      "reference_answer": "입국심사는 f(t)>=n을 만족하는 '최소' t를 찾는 lower bound 형태이고, 징검다리는 제거 횟수가 n 이하가 되는 '최대' 거리 d를 찾는 upper bound 형태입니다. 둘 다 단조성을 이용하지만 탐색 종료 조건과 mid 처리가 다릅니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "ambiguous"
+    },
+    {
+      "id": "q28",
+      "question": "두 큐 합 같게 만들기가 투 포인터 기법과 어떻게 연결되나요?",
+      "relevant": ["problems/pgs-118667-two-queues.md", "patterns/two-pointers.md"],
+      "reference_answer": "두 큐를 덱으로 합쳐 한 방향으로만 원소를 옮기는 것이 동방향 투 포인터처럼 동작합니다. 합이 큰 쪽의 앞 원소를 빼 다른 쪽 뒤에 넣으며 합을 맞춰가고, 합 갱신을 O(1)로 유지합니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q29",
+      "question": "다익스트라가 우선순위 큐(힙)를 쓰는 이유는?",
+      "relevant": ["patterns/dijkstra.md", "patterns/heap.md"],
+      "reference_answer": "아직 확정되지 않은 정점 중 거리가 가장 짧은 것을 매번 골라야 하는데, 힙이 최소 원소 추출을 O(log N)에 해주기 때문입니다. 그래서 전체 복잡도가 O((V+E) log V)가 됩니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "hallucination"
+    },
+    {
+      "id": "q30",
+      "question": "합이 K인 부분 배열의 개수를 누적 합과 해시맵으로 세는 원리를 설명해줘.",
+      "relevant": ["patterns/prefix-sum.md", "patterns/hash-map.md"],
+      "reference_answer": "누적합 total을 진행하며 total-k가 이전에 몇 번 나왔는지를 해시맵으로 즉시 조회해 더합니다. 음수가 섞여도 동작하며, 슬라이딩 윈도우 대신 누적 합 + 해시맵이 맞습니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "wrong_retrieval"
+    },
+    {
+      "id": "q31",
+      "question": "최단 경로 문제는 어떤 알고리즘으로 푸나요?",
+      "relevant": ["patterns/dijkstra.md", "patterns/bfs-dfs.md"],
+      "reference_answer": "가중치가 모두 1이면 BFS로 처음 방문 시점이 최단 거리이고, 음수 없는 가중치 그래프면 다익스트라를 씁니다. 질문이 모호하므로 가중치 유무를 먼저 확인하는 것이 좋습니다.",
+      "hop": "multi",
+      "answerable": true,
+      "failure_mode": "ambiguous"
+    },
+    {
+      "id": "q32",
+      "question": "윈도우를 옮기면서 연속 구간을 다루는 문제는 어떤 게 있나요?",
+      "relevant": ["patterns/sliding-window.md"],
+      "reference_answer": "고정 크기(길이 K 연속 구간의 합/최댓값)나 가변 크기(조건을 만족하는 가장 긴/짧은 연속 구간) 윈도우 문제가 있습니다. 보석 쇼핑이 가변 윈도우 + 해시맵의 대표 예입니다.",
+      "hop": "single",
+      "answerable": true,
+      "failure_mode": "ambiguous"
+    },
+    {
+      "id": "q33",
+      "question": "세그먼트 트리로 구간 최솟값 질의(RMQ)를 구현하는 방법을 알려줘.",
+      "relevant": [],
+      "reference_answer": "이 지식베이스에는 세그먼트 트리 문서가 없습니다. 근거 문서가 없으므로 모른다고 답해야 합니다.",
+      "hop": "none",
+      "answerable": false,
+      "failure_mode": "out_of_domain"
+    },
+    {
+      "id": "q34",
+      "question": "벨만-포드 알고리즘의 의사코드를 알려줘.",
+      "relevant": [],
+      "reference_answer": "다익스트라 문서가 '음수 간선이 있으면 벨만-포드를 쓴다'고 이름만 언급할 뿐, 벨만-포드 구현 내용은 없습니다. 근거가 없으므로 모른다고 답해야 합니다.",
+      "hop": "none",
+      "answerable": false,
+      "failure_mode": "out_of_domain"
+    },
+    {
+      "id": "q35",
+      "question": "퀵 정렬과 병합 정렬의 차이를 설명해줘.",
+      "relevant": [],
+      "reference_answer": "이 지식베이스에는 정렬 알고리즘 자체를 다루는 문서가 없습니다. 근거가 없으므로 모른다고 답해야 합니다.",
+      "hop": "none",
+      "answerable": false,
+      "failure_mode": "out_of_domain"
+    },
+    {
+      "id": "q36",
+      "question": "트라이(Trie) 자료구조는 어떤 문제에 쓰나요?",
+      "relevant": [],
+      "reference_answer": "이 지식베이스에는 트라이 문서가 없습니다. 근거가 없으므로 모른다고 답해야 합니다.",
+      "hop": "none",
+      "answerable": false,
+      "failure_mode": "out_of_domain"
+    }
+  ]
+}
